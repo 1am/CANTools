@@ -1,4 +1,4 @@
-# CAN tools vagrant
+# Vagrant linux box with CAN tools
 
 Collection of CAN reversing utilities packaged into a vagrant VM based on Ubuntu 17.
 
@@ -49,3 +49,9 @@ To erase all VM files and the VM from VirtualBox run:
 ```
 vagrant destroy
 ```
+
+## Notes
+
+When usin ICSim + control the VM can become very unresponsive most likely
+because of both using OpenGL which doesn't work well for the VM.
+Usung icsim or control separetely is working ok.
