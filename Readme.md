@@ -5,9 +5,12 @@ Collection of CAN reversing utilities packaged into a vagrant VM based on Ubuntu
 ## Tools available
 
 * can-utils
-* python-can
-* caringcaribou
-* ICSim
+* [caringcaribou](https://github.com/CaringCaribou/caringcaribou)
+* [ICSim](https://github.com/zombieCraig/ICSim)
+* [ICSim no ui fork](https://github.com/Grazfather/ICSim/tree/support_tui)
+* [Kayak](http://kayak.2codeornot2code.org/)
+* [Metasploit](https://www.metasploit.com/)
+* [python-can](https://pypi.python.org/pypi/python-can/)
 
 ## Setup
 
@@ -55,3 +58,9 @@ vagrant destroy
 When usin ICSim + control the VM can become very unresponsive most likely
 because of both using OpenGL which doesn't work well for the VM.
 Usung icsim or control separetely is working ok.
+
+## Working with real devices
+
+Forwarding devices from host os to guest VM should normally be possible. 
+See [How to Forwarding USB Devices on Oracle VirtualBox](https://www.youtube.com/watch?v=xM4nxSCWEac#t=20) 
+to see how to set it up using VirtualBox.

@@ -16,6 +16,7 @@ sudo apt-get install -y \
     inotify-tools \
     libsdl2-dev \
     libsdl2-image-dev \
+    maven \
     net-tools \
     python \
     python-pip \
