@@ -9,4 +9,5 @@ It needt to be executed in privileged mode as set in Vagrantfile.
 
 **01-bootstrap.sh** installs CAN related tools. It needs to be executed in 
 non-privileged mode as set in Vagrantfile so all files (eg. git repo clones)
-are created as vagrant user.
+are created as vagrant user. In some rare cases **sudo** will be called, eg
+for `make install` calls.

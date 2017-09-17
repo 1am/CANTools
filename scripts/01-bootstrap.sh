@@ -9,14 +9,18 @@ VAGRANT_VCAN0_SCRIPT="/etc/profile.d/11-vagrant-vcan0.sh"
 
 sudo apt-get update --fix-missing 
 sudo apt-get install -y \
+    autoconf \
     bluez \
     can-utils \
     curl \
+    default-jdk \
+    default-jre \
     git \
     inotify-tools \
+    libconfig-dev \
     libsdl2-dev \
     libsdl2-image-dev \
-    maven \
+    libsdl2-ttf-dev \
     net-tools \
     python \
     python-pip \
