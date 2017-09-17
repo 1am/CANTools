@@ -87,10 +87,12 @@ make all
 # Install Kayak
 #
 if [ -d "${KAYAK_DIR}" ]; then
+    cd ${KAYAK_DIR}
     # NOP
 else
+    mkdir -p ${KAYAK_DIR}
     cd ${KAYAK_DIR}
-    wget http://kayak.2codeornot2code.org/Kayak-1.0-SNAPSHOT-linux.sh
+    curl http://kayak.2codeornot2code.org/Kayak-1.0-SNAPSHOT-linux.sh > Kayak-1.0-SNAPSHOT-linux.sh
     chmod +x Kayak-1.0-SNAPSHOT-linux.sh
 fi
 
@@ -117,4 +119,5 @@ cd ${SOCKETCAND_DIR}
 autoconf
 ./configure
 make clean
+make
 sudo make install
