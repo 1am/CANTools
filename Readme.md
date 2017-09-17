@@ -10,6 +10,7 @@ Collection of CAN reversing utilities packaged into a vagrant VM based on Ubuntu
 * [ICSim no ui fork](https://github.com/Grazfather/ICSim/tree/support_tui)
 * [Kayak](http://kayak.2codeornot2code.org/)
 * [Metasploit](https://www.metasploit.com/)
+* [socketcand](https://github.com/dschanoeh/socketcand)
 * [python-can](https://pypi.python.org/pypi/python-can/)
 
 ## Setup
