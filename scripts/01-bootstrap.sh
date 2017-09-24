@@ -21,9 +21,13 @@ sudo apt-get install -y \
     libsdl2-dev \
     libsdl2-image-dev \
     libsdl2-ttf-dev \
+    mosquitto \
+    mosquitto-clients \
     net-tools \
     python \
     python-pip \
+    python3-pip \
+    python3-tk \
     screen \
     sudo \
     tmux \

@@ -5,7 +5,7 @@
 
 # Install tools
 
-sudo apt-get install -y \
+# sudo apt-get install -y \
 
 HOME_DIR=/home/vagrant
 TOOLS_DIR=${HOME_DIR}/tools
@@ -15,9 +15,20 @@ ICSIM_NOUI_DIR=${TOOLS_DIR}/ICSim-noui
 UDSIM_DIR=${TOOLS_DIR}/UDSim
 KAYAK_DIR=${TOOLS_DIR}/Kayak
 SOCKETCAND_DIR=${TOOLS_DIR}/socketcand
+SGFRAMEWORK_DIR=${TOOLS_DIR}/sgframework
 
+# Instally python modules
 pip install \
     python-can
+
+pip3 install \
+    paho-mqtt \
+    can4python \
+    sgframework
+
+# Install NVM for node.js projects
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.4/install.sh | bash
+
 
 mkdir -p ${TOOLS_DIR}
 cd ${TOOLS_DIR}
@@ -108,7 +119,7 @@ rm msfinstall
 # 
 # Install and build socketcand
 #
-if [ -d "${SOCKETCAND_DIR}"]; then 
+if [ -d "${SOCKETCAND_DIR}" ]; then 
     cd ${SOCKETCAND_DIR}
     git pull
 else
@@ -121,3 +132,16 @@ autoconf
 make clean
 make
 sudo make install
+
+#
+# Install sgframework examples and test files
+#
+cd ${TOOLS_DIR}
+if [ -d "${SGFRAMEWORK_DIR}" ]; then
+    cd ${SGFRAMEWORK_DIR}
+    git pull
+else
+    git clone https://github.com/caran/SecureGateway.git
+fi
+
+
