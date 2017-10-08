@@ -8,6 +8,7 @@
 # sudo apt-get install -y \
 
 HOME_DIR=/home/vagrant
+SHARED_DIR=${HOME_DIR}/shared
 TOOLS_DIR=${HOME_DIR}/tools
 CARING_CARIBOU_DIR=${TOOLS_DIR}/caringcaribou
 ICSIM_DIR=${TOOLS_DIR}/ICSim
@@ -16,6 +17,11 @@ UDSIM_DIR=${TOOLS_DIR}/UDSim
 KAYAK_DIR=${TOOLS_DIR}/Kayak
 SOCKETCAND_DIR=${TOOLS_DIR}/socketcand
 SGFRAMEWORK_DIR=${TOOLS_DIR}/sgframework
+CANCAT_DIR=${TOOLS_DIR}/CanCat
+
+ARDUINO_VERSION=1.8.5
+ARDUINO_DIR=${TOOLS_DIR}/Arduino
+ARDUINO_DESKTOP_PATH=${HOME_DIR}/Desktop/Arduino.desktop
 
 # Instally python modules
 pip install \
@@ -27,11 +33,62 @@ pip3 install \
     sgframework
 
 # Install NVM for node.js projects
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.4/install.sh | bash
-
+curl -s -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.4/install.sh | bash
+source ${HOME_DIR}/.bashrc
+nvm install 6.11.3
 
 mkdir -p ${TOOLS_DIR}
 cd ${TOOLS_DIR}
+
+#
+# Install Arduino along with libraries and boards
+# Installed boards:
+#   - Macchina
+# Installed libraries:
+#   - due_can
+#   - CAN_BUS_Shield
+#
+if [ -d "${ARDUINO_DIR}" ]; then
+    ls
+else
+    echo Downloading Arduino ${ARDUINO_VERSION}
+    curl -s https://downloads.arduino.cc/arduino-${ARDUINO_VERSION}-linux64.tar.xz > ${TOOLS_DIR}/arduino.tar.xz 
+    tar xf arduino.tar.xz
+    rm arduino.tar.xz
+    
+    mv arduino-${ARDUINO_VERSION} ${ARDUINO_DIR}
+    echo 'export PATH='${ARDUINO_DIR}':${PATH}' >> /home/vagrant/.bashrc
+    source ${HOME_DIR}/.bashrc
+    cd ${ARDUINO_DIR}
+
+    cd ${ARDUINO_DIR}/libraries
+    git clone https://github.com/collin80/due_can.git due_can
+    git clone https://github.com/Seeed-Studio/CAN_BUS_Shield.git CAN_BUS_Shield
+    
+    cd ${ARDUINO_DIR}/hardware
+    # arduino --install-library "Ethernet"
+    ${ARDUINO_DIR}/arduino --install-boards "arduino:sam"
+    git clone --recursive https://github.com/macchina/Macchina_Arduino_Boards.git macchina
+
+    # Sketch folder with link to shared dir
+    mkdir -p ${HOME_DIR}/Arduino 
+    ln -s ${HOME_DIR}/Arduino ${SHARED_DIR}
+
+    # Make a desktop icon
+    echo '[Desktop Entry]' > ${ARDUINO_DESKTOP_PATH}
+    echo 'Name=Arduino' >> ${ARDUINO_DESKTOP_PATH}
+    echo 'Comment=Arduino IDE' >> ${ARDUINO_DESKTOP_PATH}
+    echo 'Exec=/home/vagrant/tools/Arduino/arduino' >> ${ARDUINO_DESKTOP_PATH}
+    echo 'Path=/home/vagrant/tools/Arduino/' >> ${ARDUINO_DESKTOP_PATH}
+    echo 'Icon=/home/vagrant/tools/Arduino/lib/arduino_small.png' >> ${ARDUINO_DESKTOP_PATH}
+    echo 'Terminal=false' >> ${ARDUINO_DESKTOP_PATH}
+    echo 'Type=Application' >> ${ARDUINO_DESKTOP_PATH}
+    echo 'Categories=Development;' >> ${ARDUINO_DESKTOP_PATH}
+
+    desktop-file-validate ${ARDUINO_DESKTOP_PATH}
+    chmod +x ${ARDUINO_DESKTOP_PATH}
+    sudo ln -s ${ARDUINO_DESKTOP_PATH} /usr/share/applications/arduino.desktop
+fi
 
 #
 # Clone or update caringcaribou 
@@ -103,7 +160,7 @@ if [ -d "${KAYAK_DIR}" ]; then
 else
     mkdir -p ${KAYAK_DIR}
     cd ${KAYAK_DIR}
-    curl http://kayak.2codeornot2code.org/Kayak-1.0-SNAPSHOT-linux.sh > Kayak-1.0-SNAPSHOT-linux.sh
+    curl -s http://kayak.2codeornot2code.org/Kayak-1.0-SNAPSHOT-linux.sh > Kayak-1.0-SNAPSHOT-linux.sh
     chmod +x Kayak-1.0-SNAPSHOT-linux.sh
 fi
 
@@ -111,7 +168,7 @@ fi
 # Install metasploit
 #
 cd ${TOOLS_DIR}
-curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && \
+curl -s https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && \
     chmod 755 msfinstall && \
     ./msfinstall
 rm msfinstall
@@ -144,4 +201,26 @@ else
     git clone https://github.com/caran/SecureGateway.git
 fi
 
+#
+# Install CanCat
+#
+cd ${TOOLS_DIR}
+if [ -d "${CANCAT_DIR}" ]; then
+    cd ${CANCAT_DIR}
+    git pull
+else
+    git clone https://github.com/atlas0fd00m/CanCat.git
+fi
+cd ${CANCAT_DIR}
+sudo python setup.py install
 
+#
+# Install CAN bus shield Arduino library
+#
+# cd ${TOOLS_DIR}
+# if [ -d "${ARDUINO_LIB_CAN_BUS_SHIELD_DIR}" ]; then
+#     cd ${ARDUINO_LIB_CAN_BUS_SHIELD_DIR}
+#     git pull
+# else
+#     git clone https://github.com/Seeed-Studio/CAN_BUS_Shield.git ${ARDUINO_LIB_CAN_BUS_SHIELD_DIR}
+# fi

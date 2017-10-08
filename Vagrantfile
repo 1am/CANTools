@@ -1,6 +1,10 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+unless Vagrant.has_plugin?("vagrant-reload")
+    raise "`vagrant-reload` is a required plugin. Install it by running: vagrant plugin install vagrant-reload"
+end
+
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
@@ -48,8 +52,36 @@ Vagrant.configure(2) do |config|
   config.vm.provider "virtualbox" do |vb|
   #   # Display the VirtualBox GUI when booting the machine
     vb.gui = true
-  #
-  #   # Customize the amount of memory on the VM:
+    
+    # Enable the VM's virtual USB controller & enable the virtual USB 2.0 controller
+    vb.customize ["modifyvm", :id, "--usb", "on", "--usbehci", "on"]
+
+    # Forwarding USB devices. See https://github.com/jeff1evesque/machine-learning/wiki/Vagrant#usb-integration
+
+    # Add 2 devices USB forwarding for Macchina which switches between Arduino DUE
+    #   and SAMBA bootloader for flashing. 
+    vb.customize ["usbfilter", "add", "0", 
+      "--target", :id, 
+      "--name", "Arduino Due",
+      "--manufacturer", "Arduino LLC",
+      '--vendorid', '0x2341', 
+      '--productid', '0x003e']
+    vb.customize ["usbfilter", "add", "1", 
+      "--target", :id, 
+      # "--name", "at91sam SAMBA bootloader",
+      # "--manufacturer", "Atmel Corp.",
+      '--vendorid', '0x03eb', 
+      '--productid', '0x6124']
+
+    # USB2CAN
+    vb.customize ["usbfilter", "add", "2", 
+      "--target", :id, 
+      "--name", "USB2CAN converter",
+      "--manufacturer", "edevices",
+      '--vendorid', '0x0483', 
+      '--productid', ' 0x1234']
+
+    # Customize the amount of memory on the VM:
     vb.memory = "2048"
   end
   #
@@ -76,6 +108,10 @@ Vagrant.configure(2) do |config|
     s.path = "scripts/01-bootstrap.sh"
     s.upload_path = "/tmp/01-bootstrap.sh"
   end
+
+  # Reload VM after adding user to proper groups
+  config.vm.provision :reload
+  
   config.vm.provision "setup-user-tools", type: "shell" do |s|
     s.privileged = false
     s.path = "scripts/02-setup-user-tools.sh"

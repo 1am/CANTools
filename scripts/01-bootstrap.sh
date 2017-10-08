@@ -3,7 +3,8 @@
 # This script installs all general purpose tools which 
 # can be needed when working with CAN 
 
-HOME_DIR=/home/vagrant
+USER=vagrant                # Don't change or also update in other setup scripts
+HOME_DIR=/home/${USER}
 VAGRANT_PATH_SCRIPT="/etc/profile.d/10-vagrant-path.sh"
 VAGRANT_VCAN0_SCRIPT="/etc/profile.d/11-vagrant-vcan0.sh"
 
@@ -59,3 +60,6 @@ echo "PATH=${HOME_DIR}/bin:${PATH}" >> ${VAGRANT_PATH_SCRIPT}
 # Auto mount vcan0
 echo "#!/bin/sh" > ${VAGRANT_VCAN0_SCRIPT}
 echo "bash /home/vagrant/tools/ICSim/setup_vcan.sh 2> /dev/null" >> ${VAGRANT_VCAN0_SCRIPT}
+
+# Add to dialout to be able to use UART-USB devices (incl. Arduino)
+sudo adduser ${USER} dialout

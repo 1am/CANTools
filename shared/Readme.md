@@ -1,3 +1,4 @@
 # Project folder
 
-Contents of this folder will be shared with Vagrant box.
+Contents of this folder will be shared between Vagrant box
+and host OS.
