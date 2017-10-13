@@ -8,7 +8,14 @@ HOME_DIR=/home/${USER}
 VAGRANT_PATH_SCRIPT="/etc/profile.d/10-vagrant-path.sh"
 VAGRANT_VCAN0_SCRIPT="/etc/profile.d/11-vagrant-vcan0.sh"
 
+# Install all required packages and also add PPA for RVM (required by c0f)
+sudo apt-get update 
+sleep 1
+sudo apt-add-repository -y ppa:rael-gc/rvm
+sleep 1
 sudo apt-get update --fix-missing 
+sleep 1
+
 sudo apt-get install -y \
     autoconf \
     bluez \
@@ -29,7 +36,9 @@ sudo apt-get install -y \
     python-pip \
     python3-pip \
     python3-tk \
+    rvm \
     screen \
+    software-properties-common \
     sudo \
     tmux \
     unzip \
@@ -38,6 +47,7 @@ sudo apt-get install -y \
     vim \
     zsh
 
+# Update PIP
 pip install --upgrade pip
 
 cd ${HOME_DIR}

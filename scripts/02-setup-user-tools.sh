@@ -30,7 +30,8 @@ pip install \
 pip3 install \
     paho-mqtt \
     can4python \
-    sgframework
+    sgframework \
+    pyserial
 
 # Install NVM for node.js projects
 curl -s -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.4/install.sh | bash
@@ -214,13 +215,7 @@ fi
 cd ${CANCAT_DIR}
 sudo python setup.py install
 
-#
-# Install CAN bus shield Arduino library
-#
-# cd ${TOOLS_DIR}
-# if [ -d "${ARDUINO_LIB_CAN_BUS_SHIELD_DIR}" ]; then
-#     cd ${ARDUINO_LIB_CAN_BUS_SHIELD_DIR}
-#     git pull
-# else
-#     git clone https://github.com/Seeed-Studio/CAN_BUS_Shield.git ${ARDUINO_LIB_CAN_BUS_SHIELD_DIR}
-# fi
+
+# Install ruby 2.1.5 and for c0f which requires 2.1.5
+rvm install 2.1.5
+gem install c0f
