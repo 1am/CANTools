@@ -88,7 +88,7 @@ List of pre-forwarded/filtered host devices (see Vagrantfile for details):
 * [Macchina M2](https://www.macchina.cc/) (tested with flashing Blink)
     * Arduino DUE: VID = 0x2341, PID = 0x003e
     * at91sam SAMBA bootloader: VID = 0x03eb, PID = 0x6124
-* [USB2CAN from 8Devices](www.8devices.com/products/usb2can/): VID = 0x0483, PID = 0x1234 (to be tested)
+* [USB2CAN from 8Devices](www.8devices.com/products/usb2can/): VID = 0x0483, PID = 0x1234
 
 
 ### Macchina M2

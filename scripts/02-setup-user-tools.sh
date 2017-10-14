@@ -216,6 +216,7 @@ cd ${CANCAT_DIR}
 sudo python setup.py install
 
 
-# Install ruby 2.1.5 and for c0f which requires 2.1.5
-rvm install 2.1.5
+# Install ruby and for c0f
+rvm install 2.4.2
 gem install c0f
+
