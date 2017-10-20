@@ -218,5 +218,6 @@ sudo python setup.py install
 
 # Install ruby and for c0f
 rvm install 2.4.2
+rvm use 2.4.2
 gem install c0f
 
