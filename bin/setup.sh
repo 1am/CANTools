@@ -8,7 +8,7 @@ bin/box build ubuntu1704-desktop virtualbox
 
 cd ${DIR}/../
 
-vagrant box add box/virtualbox/ubuntu1704-desktop-17.0907.1.box --name CanToolsLinux
+vagrant box add ${DIR}/box-cutter/ubuntu/box/virtualbox/ubuntu1704-desktop-17.0907.1.box --name CanToolsLinux
 
 vagrant plugin install vagrant-reload
 vagrant up
