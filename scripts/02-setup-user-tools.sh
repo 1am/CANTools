@@ -5,9 +5,8 @@
 
 # Install tools
 
-# sudo apt-get install -y \
-
-HOME_DIR=/home/vagrant
+USER=vagrant
+HOME_DIR=/home/${USER}
 SHARED_DIR=${HOME_DIR}/shared
 TOOLS_DIR=${HOME_DIR}/tools
 CARING_CARIBOU_DIR=${TOOLS_DIR}/caringcaribou
@@ -23,7 +22,9 @@ ARDUINO_VERSION=1.8.5
 ARDUINO_DIR=${TOOLS_DIR}/Arduino
 ARDUINO_DESKTOP_PATH=${HOME_DIR}/Desktop/Arduino.desktop
 
-# Instally python modules
+#
+# Install python modules
+#
 sudo pip install \
     python-can
 
@@ -33,9 +34,20 @@ sudo pip3 install \
     sgframework \
     pyserial
 
+#
 # Install NVM for node.js projects
-nvm install 6.11.3
+#
+source ${HOME_DIR}/.nvm/nvm.sh
+nvm install 6.11.3 
 nvm alias default 6.11.3
+
+#
+# Install Ruby 2.4.2
+#
+rvm install 2.4.2
+sudo -H -u ${USER} \
+    /bin/bash --login -c 'rvm use 2.4.2 && rvm --default use 2.4.2'
+
 
 mkdir -p ${TOOLS_DIR}
 cd ${TOOLS_DIR}
@@ -214,10 +226,25 @@ fi
 cd ${CANCAT_DIR}
 sudo python setup.py install
 
-
-# Install ruby and for c0f
-rvm install 2.4.2
-rvm use 2.4.2
-rvm --default use 2.4.2
+#
+# Install c0f
+#
 gem install c0f
 
+
+#
+# Customize the desktop
+#
+
+# Font sizes
+gsettings set org.gnome.desktop.interface document-font-name 'Sans 10'
+gsettings set org.gnome.desktop.interface font-name 'Ubuntu 10'
+gsettings set org.gnome.desktop.interface monospace-font-name 'Ubuntu Mono 11'
+gsettings set org.gnome.nautilus.desktop font 'Ubuntu 10'
+
+
+# Change desktop background
+gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/Seebr%C3%BCcke_Graal-M%C3%BCritz_by_Oliver_hb.jpg'
+
+# Remove not needed docked shortcuts
+gsettings set com.canonical.Unity.Launcher favorites "['application://ubiquity.desktop', 'application://org.gnome.Nautilus.desktop', 'application://arduino.desktop', 'application://firefox.desktop']"

@@ -17,8 +17,7 @@ Vagrant.configure(2) do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
   # config.vm.box = "ubuntu/xenial64"
-  config.vm.box = "box-cutter/ubuntu1404-desktop"
-  config.vm.box_version = "2.0.26"
+  config.vm.box = "CanToolsLinux"
         
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -61,25 +60,29 @@ Vagrant.configure(2) do |config|
     # Add 2 devices USB forwarding for Macchina which switches between Arduino DUE
     #   and SAMBA bootloader for flashing. 
     vb.customize ["usbfilter", "add", "0", 
-      "--target", :id, 
-      "--name", "Arduino Due",
-      "--manufacturer", "Arduino LLC",
+      '--target', :id,
+      '--name', 'Arduino Due',
+      '--manufacturer', 'Arduino LLC',
       '--vendorid', '0x2341', 
-      '--productid', '0x003e']
+      '--productid', '0x003e',
+      '--revision', '0x0110'
+    ]
     vb.customize ["usbfilter", "add", "1", 
-      "--target", :id, 
-      "--name", "at91sam SAMBA bootloader",
-      "--manufacturer", "Atmel Corp.",
+      '--target', :id, 
+      '--name', 'at91sam SAMBA bootloader',
+      '--manufacturer', 'Atmel Corp.',
       '--vendorid', '0x03eb', 
-      '--productid', '0x6124']
-
+      '--productid', '0x6124',
+      '--revision', '0x0110'
+    ]
     # USB2CAN
     vb.customize ["usbfilter", "add", "2", 
-      "--target", :id, 
-      "--name", "USB2CAN converter",
-      "--manufacturer", "edevices",
+      '--target', :id, 
+      '--name', 'USB2CAN converter',
+      '--manufacturer', 'edevices',
       '--vendorid', '0x0483', 
-      '--productid', ' 0x1234']
+      '--productid', ' 0x1234'
+    ]
 
     # Customize the amount of memory on the VM:
     vb.memory = "2048"
