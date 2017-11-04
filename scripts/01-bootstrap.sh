@@ -55,6 +55,10 @@ cd ${HOME_DIR}
 # Setup oh-my-zsh
 curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | bash
 
+#Install nvm
+curl -s -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.4/install.sh | bash
+
+
 # Modprobe CAN and virtual CAN
 sudo modprobe can
 sudo modprobe vcan

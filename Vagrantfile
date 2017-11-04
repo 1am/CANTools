@@ -17,9 +17,9 @@ Vagrant.configure(2) do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
   # config.vm.box = "ubuntu/xenial64"
-  config.vm.box = "boxcutter/ubuntu1704-desktop"
-  config.vm.box_version = "17.0907.1"
-
+  config.vm.box = "box-cutter/ubuntu1404-desktop"
+  config.vm.box_version = "2.0.26"
+        
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.

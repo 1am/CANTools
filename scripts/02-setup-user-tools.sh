@@ -24,19 +24,18 @@ ARDUINO_DIR=${TOOLS_DIR}/Arduino
 ARDUINO_DESKTOP_PATH=${HOME_DIR}/Desktop/Arduino.desktop
 
 # Instally python modules
-pip install \
+sudo pip install \
     python-can
 
-pip3 install \
+sudo pip3 install \
     paho-mqtt \
     can4python \
     sgframework \
     pyserial
 
 # Install NVM for node.js projects
-curl -s -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.4/install.sh | bash
-source ${HOME_DIR}/.bashrc
 nvm install 6.11.3
+nvm alias default 6.11.3
 
 mkdir -p ${TOOLS_DIR}
 cd ${TOOLS_DIR}
@@ -219,5 +218,6 @@ sudo python setup.py install
 # Install ruby and for c0f
 rvm install 2.4.2
 rvm use 2.4.2
+rvm --default use 2.4.2
 gem install c0f
 
