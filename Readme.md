@@ -36,7 +36,7 @@ The following were tested on OSX:
 ### Checkout
 
 ```
-git clone https://github.com/1am/CANToolsLinux --recursive
+git clone --recursive https://github.com/1am/CANToolsLinux
 ```
 
 ### Build the image
@@ -54,7 +54,7 @@ To set everything up run:
 Start this and let it run. It will take a while and should not be interrupted 
 even when the installtion GUI shows up.
 
-Resulting build image will be stored in [box/ubuntu/box/virtualbox](box/ubuntu/box/virtualbox)
+Resulting build image will be stored in *box-cutter/ubuntu/box/virtualbox*
 and after importing to vagrant you might want to get rid of the .box file which is quite big.
 
 This script will build the VM, provision it and add required plugins.

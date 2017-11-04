@@ -25,10 +25,10 @@ ARDUINO_DESKTOP_PATH=${HOME_DIR}/Desktop/Arduino.desktop
 #
 # Install python modules
 #
-sudo pip install \
+sudo -H pip install \
     python-can
 
-sudo pip3 install \
+sudo -H pip3 install \
     paho-mqtt \
     can4python \
     sgframework \
@@ -174,6 +174,7 @@ else
     cd ${KAYAK_DIR}
     curl -s http://kayak.2codeornot2code.org/Kayak-1.0-SNAPSHOT-linux.sh > Kayak-1.0-SNAPSHOT-linux.sh
     chmod +x Kayak-1.0-SNAPSHOT-linux.sh
+    ./Kayak-1.0-SNAPSHOT-linux.sh --silent
 fi
 
 #
@@ -229,7 +230,9 @@ sudo python setup.py install
 #
 # Install c0f
 #
-gem install c0f
+
+sudo -H -u ${USER} \
+    /bin/bash --login -c 'gem install c0f'
 
 
 #

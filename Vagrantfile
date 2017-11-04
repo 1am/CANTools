@@ -65,12 +65,11 @@ Vagrant.configure(2) do |config|
       '--manufacturer', 'Arduino LLC',
       '--vendorid', '0x2341', 
       '--productid', '0x003e',
-      '--revision', '0x0110'
+      '--revision', '0x0100'
     ]
     vb.customize ["usbfilter", "add", "1", 
       '--target', :id, 
-      '--name', 'at91sam SAMBA bootloader',
-      '--manufacturer', 'Atmel Corp.',
+      '--name', 'Atmel Corp. at91sam SAMBA bootloader [0110]',
       '--vendorid', '0x03eb', 
       '--productid', '0x6124',
       '--revision', '0x0110'

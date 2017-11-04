@@ -58,10 +58,6 @@ sudo -H -u ${USER} \
 sudo -H -u ${USER} \
     bash --login -c 'curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | bash'
 
-# set ZSH as default shell
-sudo -H -u ${USER} \
-    bash --login -c 'chsh -s $(which zsh)'
-
 #
 # Install RVM
 #
@@ -70,10 +66,10 @@ sudo -H -u ${USER} \
 sudo -H -u ${USER} \
     bash --login -c '\curl -sSL https://get.rvm.io | bash -s stable'
 
-echo "" >> ${HOME}/.bashrc 
-echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*' \
- >> ${HOME}/.bashrc
-echo "" >> ${HOME}/.bashrc 
+# Add rvm function to .bashrc (by default only adds to .profile)
+echo "" >> ${HOME_DIR}/.bashrc 
+echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*' >> ${HOME_DIR}/.bashrc
+echo "" >> ${HOME_DIR}/.bashrc 
 
 #
 # Install nvm
@@ -81,11 +77,12 @@ echo "" >> ${HOME}/.bashrc
 sudo -H -u ${USER} \
     bash -c '\curl -s -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.4/install.sh | bash'
 
-echo '' >> ${HOME_DIR}/.bashrc
-echo 'export NVM_DIR="$HOME/.nvm"' >> ${HOME_DIR}/.bashrc
-echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm' >> ${HOME_DIR}/.bashrc
-echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion' >> ${HOME_DIR}/.bashrc
-echo '' >> ${HOME_DIR}/.bashrc
+# Add nvm function to .bashrc (by default only adds to .profile)
+# echo '' >> ${HOME_DIR}/.bashrc
+# echo 'export NVM_DIR="$HOME/.nvm"' >> ${HOME_DIR}/.bashrc
+# echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm' >> ${HOME_DIR}/.bashrc
+# echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion' >> ${HOME_DIR}/.bashrc
+# echo '' >> ${HOME_DIR}/.bashrc
 
 #
 # Modprobe CAN and virtual CAN
