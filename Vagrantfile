@@ -39,7 +39,7 @@ Vagrant.configure(2) do |config|
   # config.vm.network "public_network"
 
   config.ssh.username = "root"
-  config.ssh.private_key_path = ['./ssh-keys/pentest-env']
+  config.ssh.private_key_path = ["./ssh-keys/pentest-env", "./ssh-keys/can-tools-linux-ssh-key"]
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
@@ -66,27 +66,27 @@ Vagrant.configure(2) do |config|
     # Add 2 devices USB forwarding for Macchina which switches between Arduino DUE
     #   and SAMBA bootloader for flashing. 
     vb.customize ["usbfilter", "add", "0", 
-      '--target', :id,
-      '--name', 'Arduino Due',
-      '--manufacturer', 'Arduino LLC',
-      '--vendorid', '0x2341', 
-      '--productid', '0x003e',
-      '--revision', '0x0100'
+      "--target", :id,
+      "--name", "Arduino Due",
+      "--manufacturer", "Arduino LLC",
+      "--vendorid", "0x2341", 
+      "--productid", "0x003e",
+      "--revision", "0x0100"
     ]
     vb.customize ["usbfilter", "add", "1", 
-      '--target', :id, 
-      '--name', 'Atmel Corp. at91sam SAMBA bootloader [0110]',
-      '--vendorid', '0x03eb', 
-      '--productid', '0x6124',
-      '--revision', '0x0110'
+      "--target", :id, 
+      "--name", "Atmel Corp. at91sam SAMBA bootloader [0110]",
+      "--vendorid", "0x03eb", 
+      "--productid", "0x6124",
+      "--revision", "0x0110"
     ]
     # USB2CAN
     vb.customize ["usbfilter", "add", "2", 
-      '--target', :id, 
-      '--name', 'USB2CAN converter',
-      '--manufacturer', 'edevices',
-      '--vendorid', '0x0483', 
-      '--productid', ' 0x1234'
+      "--target", :id, 
+      "--name", "USB2CAN converter",
+      "--manufacturer", "edevices",
+      "--vendorid", "0x0483", 
+      "--productid", " 0x1234"
     ]
 
     # Customize the amount of memory on the VM:
@@ -111,6 +111,11 @@ Vagrant.configure(2) do |config|
   #   sudo apt-get install -y apache2
   # SHELL
 
+  # Copy local public key to authorized keys
+  config.vm.provision "file", 
+    source: "./ssh-keys/can-tools-linux-ssh-key.pub", 
+    destination: "/root/.ssh/authorized_keys"
+  
   # Calling in 2 separate provision sections to ensure proper order
   config.vm.provision "bootstrap", type: "shell" do |s|
     s.path = "scripts/01-bootstrap.sh"

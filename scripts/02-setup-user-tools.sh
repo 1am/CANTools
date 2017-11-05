@@ -42,13 +42,6 @@ source ${HOME_DIR}/.nvm/nvm.sh
 nvm install 6.11.3 
 nvm alias default 6.11.3
 
-#
-# Install Ruby 2.4.2
-#
-# rvm install 2.4.2
-# sudo -H -u ${USER} \
-#     /bin/bash --login -c 'rvm use 2.4.2 && rvm --default use 2.4.2'
-
 
 mkdir -p ${TOOLS_DIR}
 cd ${TOOLS_DIR}
@@ -227,17 +220,11 @@ sudo python setup.py install
 gem install c0f
 
 #
-# Customize the desktop
+# Customize UI, font sizes
 #
-
-# Font sizes
 gsettings set org.gnome.desktop.interface document-font-name 'Sans 10'
 gsettings set org.gnome.desktop.interface font-name 'Cantarell 10'
-gsettings set org.gnome.desktop.interface monospace-font-name 'Monospace 11'
+gsettings set org.gnome.desktop.interface monospace-font-name 'Monospace 10'
 
 
-# Change desktop background
-# gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/Seebr%C3%BCcke_Graal-M%C3%BCritz_by_Oliver_hb.jpg'
-
-# Remove not needed docked shortcuts
-# gsettings set com.canonical.Unity.Launcher favorites "['application://ubiquity.desktop', 'application://org.gnome.Nautilus.desktop', 'application://arduino.desktop', 'application://firefox.desktop']"
+echo "Done"
