@@ -5,8 +5,8 @@
 
 # Install tools
 
-USER=vagrant
-HOME_DIR=/home/${USER}
+USER=root
+HOME_DIR=/${USER}
 SHARED_DIR=${HOME_DIR}/shared
 TOOLS_DIR=${HOME_DIR}/tools
 CARING_CARIBOU_DIR=${TOOLS_DIR}/caringcaribou
@@ -21,6 +21,7 @@ CANCAT_DIR=${TOOLS_DIR}/CanCat
 ARDUINO_VERSION=1.8.5
 ARDUINO_DIR=${TOOLS_DIR}/Arduino
 ARDUINO_DESKTOP_PATH=${HOME_DIR}/Desktop/Arduino.desktop
+ARDUINO_APP_LAUNCHER_PATH=/usr/share/applications/arduino.desktop
 
 #
 # Install python modules
@@ -44,9 +45,9 @@ nvm alias default 6.11.3
 #
 # Install Ruby 2.4.2
 #
-rvm install 2.4.2
-sudo -H -u ${USER} \
-    /bin/bash --login -c 'rvm use 2.4.2 && rvm --default use 2.4.2'
+# rvm install 2.4.2
+# sudo -H -u ${USER} \
+#     /bin/bash --login -c 'rvm use 2.4.2 && rvm --default use 2.4.2'
 
 
 mkdir -p ${TOOLS_DIR}
@@ -69,7 +70,7 @@ else
     rm arduino.tar.xz
     
     mv arduino-${ARDUINO_VERSION} ${ARDUINO_DIR}
-    echo 'export PATH='${ARDUINO_DIR}':${PATH}' >> /home/vagrant/.bashrc
+    echo 'export PATH='${ARDUINO_DIR}':${PATH}' >> ${HOME_DIR}/.bashrc
     source ${HOME_DIR}/.bashrc
     cd ${ARDUINO_DIR}
 
@@ -90,16 +91,17 @@ else
     echo '[Desktop Entry]' > ${ARDUINO_DESKTOP_PATH}
     echo 'Name=Arduino' >> ${ARDUINO_DESKTOP_PATH}
     echo 'Comment=Arduino IDE' >> ${ARDUINO_DESKTOP_PATH}
-    echo 'Exec=/home/vagrant/tools/Arduino/arduino' >> ${ARDUINO_DESKTOP_PATH}
-    echo 'Path=/home/vagrant/tools/Arduino/' >> ${ARDUINO_DESKTOP_PATH}
-    echo 'Icon=/home/vagrant/tools/Arduino/lib/arduino_small.png' >> ${ARDUINO_DESKTOP_PATH}
+    echo 'Exec='${HOME_DIR}'/tools/Arduino/arduino' >> ${ARDUINO_DESKTOP_PATH}
+    echo 'Path='${HOME_DIR}'/tools/Arduino/' >> ${ARDUINO_DESKTOP_PATH}
+    echo 'Icon='${HOME_DIR}'/tools/Arduino/lib/arduino_small.png' >> ${ARDUINO_DESKTOP_PATH}
     echo 'Terminal=false' >> ${ARDUINO_DESKTOP_PATH}
     echo 'Type=Application' >> ${ARDUINO_DESKTOP_PATH}
     echo 'Categories=Development;' >> ${ARDUINO_DESKTOP_PATH}
 
     desktop-file-validate ${ARDUINO_DESKTOP_PATH}
-    sudo ln -s ${ARDUINO_DESKTOP_PATH} /usr/share/applications/arduino.desktop
+    sudo ln -s ${ARDUINO_DESKTOP_PATH} ${ARDUINO_APP_LAUNCHER_PATH}
     chmod +x ${ARDUINO_DESKTOP_PATH}
+    chmod +x ${ARDUINO_APP_LAUNCHER_PATH}
 fi
 
 #
@@ -177,15 +179,6 @@ else
     ./Kayak-1.0-SNAPSHOT-linux.sh --silent
 fi
 
-#
-# Install metasploit
-#
-cd ${TOOLS_DIR}
-curl -s https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && \
-    chmod 755 msfinstall && \
-    ./msfinstall
-rm msfinstall
-
 # 
 # Install and build socketcand
 #
@@ -231,9 +224,7 @@ sudo python setup.py install
 # Install c0f
 #
 
-sudo -H -u ${USER} \
-    /bin/bash --login -c 'gem install c0f'
-
+gem install c0f
 
 #
 # Customize the desktop
@@ -241,13 +232,12 @@ sudo -H -u ${USER} \
 
 # Font sizes
 gsettings set org.gnome.desktop.interface document-font-name 'Sans 10'
-gsettings set org.gnome.desktop.interface font-name 'Ubuntu 10'
-gsettings set org.gnome.desktop.interface monospace-font-name 'Ubuntu Mono 11'
-gsettings set org.gnome.nautilus.desktop font 'Ubuntu 10'
+gsettings set org.gnome.desktop.interface font-name 'Cantarell 10'
+gsettings set org.gnome.desktop.interface monospace-font-name 'Monospace 11'
 
 
 # Change desktop background
-gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/Seebr%C3%BCcke_Graal-M%C3%BCritz_by_Oliver_hb.jpg'
+# gsettings set org.gnome.desktop.background picture-uri 'file:///usr/share/backgrounds/Seebr%C3%BCcke_Graal-M%C3%BCritz_by_Oliver_hb.jpg'
 
 # Remove not needed docked shortcuts
-gsettings set com.canonical.Unity.Launcher favorites "['application://ubiquity.desktop', 'application://org.gnome.Nautilus.desktop', 'application://arduino.desktop', 'application://firefox.desktop']"
+# gsettings set com.canonical.Unity.Launcher favorites "['application://ubiquity.desktop', 'application://org.gnome.Nautilus.desktop', 'application://arduino.desktop', 'application://firefox.desktop']"

@@ -1,3 +1,5 @@
 .vagrant
 shared/*
 !shared/Readme.md
+ssh-keys/*
+!ssh-keys/.gitkeep

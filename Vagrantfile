@@ -16,9 +16,9 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  # config.vm.box = "ubuntu/xenial64"
-  config.vm.box = "CANToolsLinux"
-        
+  config.vm.box = "Sliim/kali-2017.2-amd64"
+  config.vm.box_version = "1"
+
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
@@ -38,11 +38,14 @@ Vagrant.configure(2) do |config|
   # your network.
   # config.vm.network "public_network"
 
+  config.ssh.username = "root"
+  config.ssh.private_key_path = ['./ssh-keys/pentest-env']
+
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  config.vm.synced_folder "shared", "/home/vagrant/shared"
+  config.vm.synced_folder "shared", "/root/shared"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -52,6 +55,9 @@ Vagrant.configure(2) do |config|
   #   # Display the VirtualBox GUI when booting the machine
     vb.gui = true
     
+    vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
+    vb.customize ["modifyvm", :id, "--draganddrop", "bidirectional"]
+
     # Enable the VM's virtual USB controller & enable the virtual USB 2.0 controller
     vb.customize ["modifyvm", :id, "--usb", "on", "--usbehci", "on"]
 

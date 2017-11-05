@@ -3,8 +3,8 @@
 # This script installs all general purpose tools which 
 # can be needed when working with CAN 
 
-USER=vagrant                # Don't change or also update in other setup scripts
-HOME_DIR=/home/${USER}
+USER=root                # Don't change or also update in other setup scripts
+HOME_DIR=/${USER}
 VAGRANT_PATH_SCRIPT="/etc/profile.d/10-vagrant-path.sh"
 VAGRANT_VCAN0_SCRIPT="/etc/profile.d/11-vagrant-vcan0.sh"
 
@@ -49,22 +49,18 @@ sudo apt-get install -y \
 #
 # Update PIP
 #
-sudo -H -u ${USER} \
-    bash --login -c 'pip install --upgrade pip'
+pip install --upgrade pip
 
 #
 # Setup oh-my-zsh
 #
-sudo -H -u ${USER} \
-    bash --login -c 'curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | bash'
+curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | bash
 
 #
 # Install RVM
 #
-sudo -H -u ${USER} \
-    bash --login -c 'gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB'
-sudo -H -u ${USER} \
-    bash --login -c '\curl -sSL https://get.rvm.io | bash -s stable'
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+\curl -sSL https://get.rvm.io | bash -s stable
 
 # Add rvm function to .bashrc (by default only adds to .profile)
 echo "" >> ${HOME_DIR}/.bashrc 
@@ -74,8 +70,7 @@ echo "" >> ${HOME_DIR}/.bashrc
 #
 # Install nvm
 #
-sudo -H -u ${USER} \
-    bash -c '\curl -s -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.4/install.sh | bash'
+\curl -s -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.4/install.sh | bash
 
 # Add nvm function to .bashrc (by default only adds to .profile)
 # echo '' >> ${HOME_DIR}/.bashrc

@@ -1,12 +1,14 @@
-#!/bin/bash
+#!/bin/bash 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-
-cd ${DIR}/../box-cutter/ubuntu
-bin/box build ubuntu1704-desktop virtualbox
-vagrant box add box/virtualbox/ubuntu1704-desktop-17.0907.1.box --name CANToolsLinux
+cd ${DIR}/../ssh-keys
+if [ ! -f "${DIR}/../ssh-keys/pentest-env" ]; then
+    wget https://raw.githubusercontent.com/Sliim/pentest-env/master/ssh-keys/pentest-env
+fi
+if [ ! -f "${DIR}/../ssh-keys/pentest-env.pub" ]; then
+    wget https://raw.githubusercontent.com/Sliim/pentest-env/master/ssh-keys/pentest-env.pub
+fi
 
 cd ${DIR}/..
-vagrant plugin install vagrant-reload
 vagrant up
 
