@@ -137,4 +137,7 @@ this is the issue - recover from failed flashing just flash the board via Arduin
 
 ## License
 
-MIT. See [License](./LICENSE)
+GNU General Public License v3.0. 
+
+See [License](./LICENSE)
+
