@@ -98,8 +98,8 @@ else
     echo 'Categories=Development;' >> ${ARDUINO_DESKTOP_PATH}
 
     desktop-file-validate ${ARDUINO_DESKTOP_PATH}
-    chmod +x ${ARDUINO_DESKTOP_PATH}
     sudo ln -s ${ARDUINO_DESKTOP_PATH} /usr/share/applications/arduino.desktop
+    chmod +x ${ARDUINO_DESKTOP_PATH}
 fi
 
 #

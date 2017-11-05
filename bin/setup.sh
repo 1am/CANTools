@@ -1,15 +1,12 @@
 #!/bin/bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-cd ${DIR}/../
 
-cd box-cutter/ubuntu
+cd ${DIR}/../box-cutter/ubuntu
 bin/box build ubuntu1704-desktop virtualbox
+vagrant box add box/virtualbox/ubuntu1704-desktop-17.0907.1.box --name CanToolsLinux
 
-cd ${DIR}/../
-
-vagrant box add ${DIR}/box-cutter/ubuntu/box/virtualbox/ubuntu1704-desktop-17.0907.1.box --name CanToolsLinux
-
+cd ${DIR}/..
 vagrant plugin install vagrant-reload
 vagrant up
 
