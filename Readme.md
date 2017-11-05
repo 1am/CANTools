@@ -54,6 +54,8 @@ and also installing required Vagrant plugins.
 
 ### Start
 
+After initial setup script built the box successfuly it can be started again by running:
+
 ```
 vagrant up
 ```
