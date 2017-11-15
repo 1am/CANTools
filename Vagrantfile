@@ -59,7 +59,10 @@ Vagrant.configure(2) do |config|
     vb.customize ["modifyvm", :id, "--draganddrop", "bidirectional"]
 
     # Enable the VM's virtual USB controller & enable the virtual USB 2.0 controller
-    vb.customize ["modifyvm", :id, "--usb", "on", "--usbehci", "on"]
+    vb.customize ["modifyvm", :id, 
+      "--usb", "on", 
+      "--usbehci", "on"
+    ]
 
     # Forwarding USB devices. See https://github.com/jeff1evesque/machine-learning/wiki/Vagrant#usb-integration
 
@@ -87,6 +90,14 @@ Vagrant.configure(2) do |config|
       "--manufacturer", "edevices",
       "--vendorid", "0x0483", 
       "--productid", " 0x1234"
+    ]
+    # UCCB ( https://ucandevices.github.io/uccb.html )
+    vb.customize ["usbfilter", "add", "3", 
+      "--target", :id, 
+      "--name", "CANDevices UCCB",
+      "--vendorid", "0x0483",
+      "--productid", "0x5740",
+      "--revision", "0x0200",
     ]
 
     # Customize the amount of memory on the VM:

@@ -73,7 +73,9 @@ echo '' >> ${HOME_DIR}/.zshrc
 # Modprobe CAN and virtual CAN
 #
 modprobe can
+modprobe can-raw
 modprobe vcan
+modprobe slcan
 
 #
 # Enable vcan

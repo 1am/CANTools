@@ -61,7 +61,7 @@ vagrant up
 ```
 
 This will start the system and a GUI window.
-Default user password is `root` / `root`
+Default user password is `root` / `toor`
 
 Tools will be located in **~/tools** folder.
 
@@ -127,6 +127,7 @@ List of pre-forwarded/filtered host devices (see Vagrantfile for details):
     * Arduino DUE: VID = 0x2341, PID = 0x003e
     * at91sam SAMBA bootloader: VID = 0x03eb, PID = 0x6124
 * [USB2CAN from 8Devices](www.8devices.com/products/usb2can/): VID = 0x0483, PID = 0x1234
+* [CanDevices UBCB](https://ucandevices.github.io/uccb.html): VID = 0x0483, PID = 0x5740
 
 
 ### Macchina M2
