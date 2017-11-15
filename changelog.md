@@ -1,3 +1,15 @@
+# 0.3.1
+
+- Hardware
+    - Adding forwarding rule for [UBBC](https://ucandevices.github.io/uccb.html)
+
+# 0.3.0
+
+- Software
+    - Various fixes in installed packages
+- Vagrant/VM
+    - Changing base distribution to Kali Linux
+
 # 0.2.0
 
 - Software
