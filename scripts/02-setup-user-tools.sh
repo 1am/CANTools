@@ -47,6 +47,13 @@ mkdir -p ${TOOLS_DIR}
 cd ${TOOLS_DIR}
 
 #
+# Install Vundle (~/.vimrc needs to be properly set up by this point)
+#
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+vim +PluginInstall +qall &>/dev/null
+
+
+#
 # Install Arduino along with libraries and boards
 # Installed boards:
 #   - Macchina

@@ -127,6 +127,11 @@ Vagrant.configure(2) do |config|
     source: "./ssh-keys/can-tools-linux-ssh-key.pub", 
     destination: "/root/.ssh/authorized_keys"
   
+  # Copy vimrc
+  config.vm.provision "file", 
+    source: "./files/vimrc", 
+    destination: "/root/.vimrc"
+
   # Calling in 2 separate provision sections to ensure proper order
   config.vm.provision "bootstrap", type: "shell" do |s|
     s.path = "scripts/01-bootstrap.sh"

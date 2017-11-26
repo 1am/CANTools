@@ -100,4 +100,10 @@ echo "bash "${HOME_DIR}"/tools/ICSim/setup_vcan.sh 2> /dev/null" >> ${VAGRANT_VC
 #
 timedatectl set-timezone Europe/Warsaw
 
+#
+# Setup Metasploit DB
+#
+systemctl start postgresql
+msfdb init
+
 echo "Done"
