@@ -50,8 +50,8 @@ cd ${TOOLS_DIR}
 # Install Vundle (~/.vimrc needs to be properly set up by this point)
 #
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-vim +PluginInstall +qall &>/dev/null
-
+# Plugin install confirmations, src: https://github.com/VundleVim/Vundle.vim/issues/511#issuecomment-134251209
+echo | echo | vim +PluginInstall +qall &>/dev/null
 
 #
 # Install Arduino along with libraries and boards
