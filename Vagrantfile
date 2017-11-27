@@ -54,6 +54,9 @@ Vagrant.configure(2) do |config|
   config.vm.provider "virtualbox" do |vb|
   #   # Display the VirtualBox GUI when booting the machine
     vb.gui = true
+
+    # For connectivity with other VMs
+    config.vm.network "private_network", :type => 'dhcp', :name => 'vboxnet2', :adapter => 2
     
     vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
     vb.customize ["modifyvm", :id, "--draganddrop", "bidirectional"]
